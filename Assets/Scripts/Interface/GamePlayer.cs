@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GamePlayer : MonoBehaviour, IPlayer
@@ -73,10 +74,18 @@ public class GamePlayer : MonoBehaviour, IPlayer
         //Yのaxisの入力
         float verticalInput = Input.GetAxis("Vertical");
         //使うスピード（input依存)
-        float maxSpeed = GameStructure.GetInstance().playerStructure.speed * verticalInput;
+        float maxSpeed = (GameStructure.GetInstance().playerStructure.speed* (verticalInput*1)) * verticalInput;
         //ベロシティー
         Vector3 velocity = GetRigidBody().linearVelocity + (this.transform.forward * verticalInput * maxSpeed);
         //クランプ（ここでyもクランプされる）
+        if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
+        {
+            // 3. 実際の長さを平方根（ルート）で求める
+            float magnitude = (float)Math.Sqrt(velocity.sqrMagnitude);
+
+            // 4. 正規化しつつ、最大値を掛けて新しいベクトルを生成する
+            velocity = velocity / magnitude * maxSpeed;
+        }
         Vector3 clampedVelocity = Vector3.ClampMagnitude(velocity, maxSpeed);
         //yをの要素を復元
         clampedVelocity.y = velocity.y;
