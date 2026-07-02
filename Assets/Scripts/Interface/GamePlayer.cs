@@ -15,8 +15,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
     }
     private Vector3 point;
 
-    private MeshFilter itemFilter;
-
     protected Rigidbody GetRigidBody()
     {
         Rigidbody body;
@@ -99,10 +97,5 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.forward);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.up);
-    }
-
-    public void CreateMove()
-    {
-        throw new System.NotImplementedException();
     }
 }
