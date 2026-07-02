@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GamePlayer : MonoBehaviour, IPlayer
 {
+    [SerializeField] public Camera gameCamera;
     // モック用アイテム
     [SerializeField] public GameObject item;
 
@@ -43,7 +44,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        if (Physics.Raycast(gameCamera.ScreenPointToRay(Input.mousePosition), out hit))
         {
             point = hit.point;
             if (Vector2.Distance(point, this.transform.position) < GameStructure.GetInstance().playerStructure.deadzone)
