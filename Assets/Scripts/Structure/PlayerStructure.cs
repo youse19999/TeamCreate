@@ -9,5 +9,6 @@ public class PlayerStructure : MonoBehaviour
     public float stopSpeed;
     public float speed;
     public float deadzone;
+    public float rotateSpeed;
     public ItemStructure Item { get; set; } = default;
 }

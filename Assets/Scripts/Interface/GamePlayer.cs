@@ -7,6 +7,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
     [SerializeField] public GameObject item;
 
     [SerializeField] private Transform head;
+    [SerializeField]  private float rotation;
 
     private GameObject headItem;
 
@@ -15,6 +16,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         throw new System.NotImplementedException();
     }
     private Vector3 point;
+    private Vector3 beforePoint;
 
     protected Rigidbody GetRigidBody()
     {
@@ -44,29 +46,22 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(gameCamera.ScreenPointToRay(Input.mousePosition), out hit))
+
+        float horizonInput = Input.GetAxis("Horizontal");
+        rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+        point = this.transform.position + new Vector3(Mathf.Cos(rotation), 0, Mathf.Sin(rotation)) * 2;
+        //this.transform.rotation = ;
+        //ツイスト
+        Quaternion refQ = Quaternion.LookRotation(point - this.transform.position, this.transform.forward);
+        Vector3 qVector = new Vector3(refQ.x, refQ.y, refQ.z);
+        //yのみ
+        Vector3 projection = Vector3.Project(qVector, Vector3.up);
+        //クオータニオン
+        Quaternion q = new Quaternion(projection.x, projection.y, projection.z, refQ.w);
+        //符号
+        float dot = Quaternion.Dot(q, refQ);
+        if ((beforePoint-point).magnitude < 0.1f)
         {
-            point = hit.point;
-            if (Vector2.Distance(point, this.transform.position) < GameStructure.GetInstance().playerStructure.deadzone)
-            {
-                GetRigidBody().linearVelocity = Vector3.zero;
-                return;
-            }
-            if (hit.collider.gameObject == this.gameObject)
-            {
-                GetRigidBody().linearVelocity = Vector3.zero;
-                return;
-            }
-            this.transform.rotation = Quaternion.LookRotation(point - this.transform.position, this.transform.forward);
-            //ツイスト
-            Quaternion refQ = this.transform.rotation;
-            Vector3 qVector = new Vector3(refQ.x, refQ.y, refQ.z);
-            //yのみ
-            Vector3 projection = Vector3.Project(qVector, Vector3.up);
-            //クオータニオン
-            Quaternion q = new Quaternion(projection.x, projection.y, projection.z, this.transform.rotation.w);
-            //符号
-            float dot = Quaternion.Dot(q, refQ);
             if (dot > 0.0f)
             {
                 this.transform.rotation = q;
@@ -75,19 +70,20 @@ public class GamePlayer : MonoBehaviour, IPlayer
             {
                 this.transform.rotation = Quaternion.Inverse(q);
             }
-            //Yのaxisの入力
-            float verticalInput = Input.GetAxis("Vertical");
-            //使うスピード（input依存)
-            float maxSpeed = GameStructure.GetInstance().playerStructure.speed * verticalInput;
-            //ベロシティー
-            Vector3 velocity = GetRigidBody().linearVelocity + (this.transform.forward * maxSpeed);
-            //クランプ（ここでyもクランプされる）
-            Vector3 clampedVelocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-            //yをの要素を復元
-            clampedVelocity.y = velocity.y;
-            //最終的なクランプ済みのlinearVelocityをセット
-            GetRigidBody().linearVelocity = clampedVelocity;
         }
+        //Yのaxisの入力
+        float verticalInput = Input.GetAxis("Vertical");
+        //使うスピード（input依存)
+        float maxSpeed = GameStructure.GetInstance().playerStructure.speed * verticalInput;
+        //ベロシティー
+        Vector3 velocity = GetRigidBody().linearVelocity + (this.transform.forward * verticalInput * maxSpeed);
+        //クランプ（ここでyもクランプされる）
+        Vector3 clampedVelocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+        //yをの要素を復元
+        clampedVelocity.y = velocity.y;
+        //最終的なクランプ済みのlinearVelocityをセット
+        GetRigidBody().linearVelocity = clampedVelocity;
+        beforePoint = point;
     }
     public void OnDrawGizmos()
     {
@@ -98,5 +94,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.forward);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.up);
+
+        Gizmos.DrawWireSphere(point, 1.0f);
     }
 }
