@@ -18,7 +18,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void Start()
     {
         GetRigidBody();
-        itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
+        //itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
     }
 
     public void Update()
