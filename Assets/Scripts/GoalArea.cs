@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GoalArea : MonoBehaviour
 {
-    BoxCollider boxCollider;
     [SerializeField]GameObject targetPlayer;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,7 +20,7 @@ public class GoalArea : MonoBehaviour
     {
         if (collider.gameObject == targetPlayer)
         {
-            Debug.Log("“ü‚è‚Ü‚µ‚½B");
+            Debug.Log("â€œÃ¼â€šÃ¨â€šÃœâ€šÂµâ€šÂ½ÂB");
         }
     }
 }
