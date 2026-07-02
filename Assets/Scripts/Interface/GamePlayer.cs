@@ -7,8 +7,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
 {
     public void CreateMove()
     {
-    public void CreateMove()
-    {
         throw new System.NotImplementedException();
     }
 
