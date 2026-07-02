@@ -32,7 +32,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
         GetRigidBody();
 
         // モックアイテムを頭上表示
-        ShowItem(item);
     }
     public void ShowItem(GameObject itemPrefab)
     {
