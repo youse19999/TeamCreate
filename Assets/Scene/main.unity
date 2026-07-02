@@ -357,7 +357,6 @@ Transform:
 =======
   m_LocalPosition: {x: 0.3545251, y: 0, z: 0.23}
   m_LocalScale: {x: 15, y: 1, z: 15}
->>>>>>> Stashed changes
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -453,9 +452,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
-=======
->>>>>>> main
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1762491340
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +550,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &2113807491
+  --- !u!1 &2113807491
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -598,6 +595,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
 --- !u!1001 &351492685765297009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -669,6 +667,10 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
+=======
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
+--- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
