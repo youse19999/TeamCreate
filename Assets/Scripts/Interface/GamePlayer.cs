@@ -11,8 +11,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
     [SerializeField] private Transform head;
     [SerializeField]  private float rotation;
 
-    [SerializeField] private UIDocument document;
-
     private GameObject headItem;
 
     public void CreateMove()
@@ -58,7 +56,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
         RaycastHit hit;
 
         float horizonInput = Input.GetAxis("Horizontal");
-        rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
         if (MathF.Abs(horizonInput) > 0.1f)
         {
             rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed * Time.deltaTime;
@@ -125,7 +122,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         if (Physics.Raycast(ray2, out hit, 100.0f))
         {
             Debug.DrawLine(this.transform.position, hit.point, Color.blue);
-            this.transform.position = new Vector3(this.transform.position.x,hit.point.y+0.5f,this.transform.position.z);
+            this.transform.position = new Vector3(this.transform.position.x,hit.point.y,this.transform.position.z);
         }
         else
         {
@@ -135,10 +132,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
     }
     public void OnDrawGizmos()
     {
-        if (document.rootVisualElement == null)
-        {
-            return;
-        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(point, 0.1f);
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.right);
@@ -162,9 +155,5 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Gizmos.DrawCube(this.transform.position, this.transform.forward * this.GetRigidBody().angularVelocity.z * rigidViewSize);
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(this.transform.position, this.transform.up * this.GetRigidBody().angularVelocity.y * rigidViewSize);
-
-        Gizmos.DrawWireSphere(point, 1.0f);
-        var text = document.rootVisualElement.Q("txt") as TextElement;
-        text.text = "";
     }
 }
