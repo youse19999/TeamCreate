@@ -3,7 +3,7 @@ using UnityEngine;
 public class GoalArea : MonoBehaviour
 {
     [SerializeField]GameObject targetPlayer;
-    [SerializeField] private int point = 0;
+    [SerializeField] public int point = 0;
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
 
