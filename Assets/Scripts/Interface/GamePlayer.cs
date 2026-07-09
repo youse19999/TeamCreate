@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GamePlayer : MonoBehaviour, IPlayer
 {
@@ -8,6 +9,8 @@ public class GamePlayer : MonoBehaviour, IPlayer
 
     [SerializeField] private Transform head;
     [SerializeField]  private float rotation;
+
+    [SerializeField] private UIDocument document;
 
     private GameObject headItem;
 
@@ -48,7 +51,18 @@ public class GamePlayer : MonoBehaviour, IPlayer
         RaycastHit hit;
 
         float horizonInput = Input.GetAxis("Horizontal");
+<<<<<<< Updated upstream
         rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+=======
+        if (MathF.Abs(horizonInput) > 0.1f)
+        {
+            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed * Time.deltaTime;
+        }
+        else
+        {
+
+        }
+>>>>>>> Stashed changes
         point = this.transform.position + new Vector3(Mathf.Cos(rotation), 0, Mathf.Sin(rotation)) * 2;
         //this.transform.rotation = ;
         //ツイスト
@@ -60,7 +74,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Quaternion q = new Quaternion(projection.x, projection.y, projection.z, refQ.w);
         //符号
         float dot = Quaternion.Dot(q, refQ);
-        if ((beforePoint-point).magnitude < 0.1f)
+        if ((beforePoint - point).magnitude < 0.1f)
         {
             if (dot > 0.0f)
             {
@@ -74,7 +88,11 @@ public class GamePlayer : MonoBehaviour, IPlayer
         //Yのaxisの入力
         float verticalInput = Input.GetAxis("Vertical");
         //使うスピード（input依存)
+<<<<<<< Updated upstream
         float maxSpeed = GameStructure.GetInstance().playerStructure.speed * verticalInput;
+=======
+        float maxSpeed = (GameStructure.GetInstance().playerStructure.speed * (verticalInput * 1)) * verticalInput;
+>>>>>>> Stashed changes
         //ベロシティー
         Vector3 velocity = GetRigidBody().linearVelocity + (this.transform.forward * verticalInput * maxSpeed);
         //クランプ（ここでyもクランプされる）
@@ -84,9 +102,35 @@ public class GamePlayer : MonoBehaviour, IPlayer
         //最終的なクランプ済みのlinearVelocityをセット
         GetRigidBody().linearVelocity = clampedVelocity;
         beforePoint = point;
+        //さかのぼり
+        Ray ray = new Ray(this.transform.position, this.transform.forward);
+        if (Physics.Raycast(ray, out hit, 100.0f))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+            Debug.DrawLine(hit.point, hit.point + hit.normal * 2, Color.red);
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green);
+        }
+        Ray ray2 = new Ray(this.transform.position + this.transform.forward, -this.transform.up);
+        if (Physics.Raycast(ray2, out hit, 100.0f))
+        {
+            Debug.DrawLine(this.transform.position, hit.point, Color.blue);
+            this.transform.position = new Vector3(this.transform.position.x,hit.point.y+0.5f,this.transform.position.z);
+        }
+        else
+        {
+            Debug.DrawRay(ray2.origin, ray2.direction * 100.0f, Color.green);
+        }
+        this.GetRigidBody().angularVelocity = Vector3.zero;
     }
     public void OnDrawGizmos()
     {
+        if (document.rootVisualElement == null)
+        {
+            return;
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(point, 0.1f);
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.right);
@@ -95,6 +139,24 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Gizmos.color = Color.green;
         Gizmos.DrawLine(this.transform.position, this.transform.position + this.transform.up);
 
+        float rigidViewSize = 1f;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(this.transform.position, this.transform.right* this.GetRigidBody().linearVelocity.x* rigidViewSize);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(this.transform.position, this.transform.forward* this.GetRigidBody().linearVelocity.z* rigidViewSize);
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(this.transform.position, this.transform.up* this.GetRigidBody().linearVelocity.y* rigidViewSize);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawCube(this.transform.position, this.transform.right * this.GetRigidBody().angularVelocity.x * rigidViewSize);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(this.transform.position, this.transform.forward * this.GetRigidBody().angularVelocity.z * rigidViewSize);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(this.transform.position, this.transform.up * this.GetRigidBody().angularVelocity.y * rigidViewSize);
+
         Gizmos.DrawWireSphere(point, 1.0f);
+        var text = document.rootVisualElement.Q("txt") as TextElement;
+        text.text = "";
     }
 }
