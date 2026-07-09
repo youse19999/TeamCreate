@@ -36,21 +36,28 @@ public class GamePlayer : MonoBehaviour, IPlayer
     }
     public void ShowItem(GameObject itemPrefab)
     {
+        if (HasItem())
+        {
+            return;
+        }
         headItem = Instantiate(itemPrefab, head);
 
         headItem.transform.localPosition = new Vector3(0f, 0.3f, 0f);
         headItem.transform.localRotation = Quaternion.identity;
         //itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
     }
-
+    public bool HasItem()
+    {
+        return headItem != null;
+    }
     public void Update()
     {
         RaycastHit hit;
 
         float horizonInput = Input.GetAxis("Horizontal");
-        if (MathF.Abs(horizonInput) > 0.9f)
+        if (MathF.Abs(horizonInput) > 0.1f)
         {
-            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed*Time.deltaTime;
         }
         else
         {
