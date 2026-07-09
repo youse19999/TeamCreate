@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CanvasParamwter
   m_EditorClassIdentifier: 
   TimeLimit: 180
+  TitleMoveSpeed: 100

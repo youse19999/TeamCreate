@@ -6,4 +6,7 @@ public class CanvasScriptableObject : ScriptableObject
 {
     [SerializeField] 
     public float TimeLimit;
+
+    [SerializeField]
+    public float TitleMoveSpeed;
 }
