@@ -53,7 +53,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         float horizonInput = Input.GetAxis("Horizontal");
         if (MathF.Abs(horizonInput) > 0.1f)
         {
-            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed*Time.deltaTime;
         }
         else
         {
