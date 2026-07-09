@@ -42,13 +42,16 @@ public class GamePlayer : MonoBehaviour, IPlayer
         headItem.transform.localRotation = Quaternion.identity;
         //itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
     }
-
+    public bool HasItem()
+    {
+        return headItem != null;
+    }
     public void Update()
     {
         RaycastHit hit;
 
         float horizonInput = Input.GetAxis("Horizontal");
-        if (MathF.Abs(horizonInput) > 0.9f)
+        if (MathF.Abs(horizonInput) > 0.1f)
         {
             rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
         }
