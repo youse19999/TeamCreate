@@ -48,7 +48,14 @@ public class GamePlayer : MonoBehaviour, IPlayer
         RaycastHit hit;
 
         float horizonInput = Input.GetAxis("Horizontal");
-        rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+        if (MathF.Abs(horizonInput) > 0.9f)
+        {
+            rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed;
+        }
+        else
+        {
+            
+        }
         point = this.transform.position + new Vector3(Mathf.Cos(rotation), 0, Mathf.Sin(rotation)) * 2;
         //this.transform.rotation = ;
         //ツイスト
