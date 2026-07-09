@@ -107,6 +107,29 @@ public class GamePlayer : MonoBehaviour, IPlayer
         //最終的なクランプ済みのlinearVelocityをセット
         GetRigidBody().linearVelocity = clampedVelocity;
         beforePoint = point;
+        //地面確認
+        Debug.Log((this.transform.forward * 0.1f));
+        Vector3 rayOrigin = this.transform.position + (this.transform.forward*0.3f) + (this.transform.up * 5f);
+
+        Vector3 rayDirection = -this.transform.up;
+
+        // 4. Rayの生成（開始位置と方向を指定）
+        Ray ray2 = new Ray(rayOrigin, rayDirection);
+        if (Physics.Raycast(ray2, out hit, 100.0f, LayerMask.GetMask("Ground")))
+        {
+            if (hit.collider.gameObject != this.gameObject)
+            {
+                if (MathF.Abs(this.transform.position.y - hit.point.y) > 0.1f)
+                {
+                    this.transform.position = new Vector3(this.transform.position.x, hit.point.y,this.transform.position.z);
+                }
+            }
+        }
+        else
+        {
+            GetRigidBody().linearVelocity = Vector3.zero;
+        }
+        Debug.DrawLine(this.transform.position + this.transform.forward - (this.transform.up * 5), this.transform.position + this.transform.forward + (this.transform.up * 5), Color.magenta);
         //さかのぼり
         Ray ray = new Ray(this.transform.position, this.transform.forward);
         if (Physics.Raycast(ray, out hit, 100.0f))
@@ -118,16 +141,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         {
             Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green);
         }
-        Ray ray2 = new Ray(this.transform.position + this.transform.forward, -this.transform.up);
-        if (Physics.Raycast(ray2, out hit, 100.0f))
-        {
-            Debug.DrawLine(this.transform.position, hit.point, Color.blue);
-            this.transform.position = new Vector3(this.transform.position.x,hit.point.y,this.transform.position.z);
-        }
-        else
-        {
-            Debug.DrawRay(ray2.origin, ray2.direction * 100.0f, Color.green);
-        }
+
         this.GetRigidBody().angularVelocity = Vector3.zero;
     }
     public void OnDrawGizmos()
