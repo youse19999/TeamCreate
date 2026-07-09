@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GoalArea : MonoBehaviour
 {
-    [SerializeField]GameObject targetPlayer;
-    [SerializeField] private int point = 0;
+    [SerializeField] GameObject targetPlayer;
+    [SerializeField] public int point = 0;
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
 
@@ -14,32 +14,28 @@ public class GoalArea : MonoBehaviour
         //アイテムスクリプトなどを取得
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider collider)
     {
         //エリアに侵入したアイテムの固有ポイントを取得、その分ポイント加算
         //if(collider.gameObject.tag == "Item"){;}
         //仮実装：アイテムをエリアに置くとポイント加算
-        point++;
+     
         if (collider.gameObject == targetPlayer)
         {
-            Debug.Log($"{playerName}のポイント:{point}");
-        }
-    }
+            //ターゲットプレイヤの所持しているアイテムを取得
+            Transform ItemPosition = targetPlayer.transform.Find("ItemPosition");
 
-    private void OnTriggerExit(Collider collider)
-    {
-        //エリアから出たアイテムの固有ポイントを取得、その分ポイント減算
-
-        //仮実装：アイテムをエリアに置くとポイント加算
-        point--;
-        if (collider.gameObject == targetPlayer)
-        {
+            //アイテムのポイント加算と手持ちのアイテムデストロイ
+            foreach(Transform child in ItemPosition)
+            {
+                //ItemPositionの子オブジェクト、スクリプトを取得、このPointに加算する
+                GameObject Item = child.gameObject;
+                ItemScript itemScript = Item.GetComponent<ItemScript>();
+                this.point += itemScript.point;
+                //加算を終えたらデストロイ
+                Destroy(Item);
+            }
+            //デバッグ
             Debug.Log($"{playerName}のポイント:{point}");
         }
     }
