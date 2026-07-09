@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1261274252024992743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809889807434656766}
+  m_Layer: 0
+  m_Name: ItemPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &809889807434656766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261274252024992743}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8373725867060876909}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5892188240434865980
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +66,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1131138205830283863}
+  - {fileID: 809889807434656766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4105064438855982929
@@ -49,8 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fedf75d82db9047b2b20850b6ae816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 1227542634952960983, guid: 2910135bd56846f47abc4540ea54a43c, type: 3}
-  head: {fileID: 169297596306300685}
+  gameCamera: {fileID: 0}
+  item: {fileID: 0}
+  head: {fileID: 809889807434656766}
+  rotation: 0
 --- !u!65 &5645556055204951705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5892188240434865980}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b62267b989150e949a03386039eaece4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -113,6 +147,7 @@ MonoBehaviour:
   stopSpeed: 1
   speed: 1
   deadzone: 0.25
+  rotateSpeed: 0.05
 --- !u!1 &7275219504924172716
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,11 +285,6 @@ PrefabInstance:
       addedObject: {fileID: 781142965658393117}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
---- !u!4 &169297596306300685 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7359535068273311375, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
-  m_PrefabInstance: {fileID: 7240421931472642434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1131138205830283863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7766942812053758933, guid: b449c0c795670244eaa69aecb5fce149, type: 3}
