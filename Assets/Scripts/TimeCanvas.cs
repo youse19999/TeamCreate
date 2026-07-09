@@ -4,8 +4,8 @@ using TMPro;
 public class TimeCanvas : MonoBehaviour
 {
     public TMP_Text ScoreText;
-    float TimeLimit;
-     bool Finish;
+    [SerializeField] bool Finish;
+    [SerializeField] private CanvasScriptableObject canvasParameter;
 
     public void ScoreRender(int time)
     {
@@ -16,15 +16,15 @@ public class TimeCanvas : MonoBehaviour
     {
         if (Finish)
         {
-            TimeLimit = 0;
+            canvasParameter.TimeLimit = 0;
         }
         else
         {
             Debug.Log("ŽžŠÔ‚ªŒ¸‚Á‚Ä‚¢‚Ü‚·");
 
-            TimeLimit -= Time.deltaTime;
+            canvasParameter.TimeLimit -= Time.deltaTime;
 
-            if (TimeLimit > 0) { return; }
+            if ((int)canvasParameter.TimeLimit >= 1) { return; }
             Finish = true;
         }
     }
@@ -32,15 +32,14 @@ public class TimeCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        TimeLimit = 60;
         Finish = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ScoreRender((int)TimeLimit);
+        ScoreRender((int)canvasParameter.TimeLimit);
 
-        TimeA((int)TimeLimit);
+        TimeA((int)canvasParameter.TimeLimit);
     }
 }

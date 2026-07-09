@@ -3,11 +3,13 @@ using TMPro;
 
 public class PointCanvas : MonoBehaviour
 {
-    public TMP_Text PointText;
+    public TMP_Text PointText1P;
+    public TMP_Text PointText2P;
 
     public void Point(int point)
     {
-        PointText.text = point + "Point";
+        PointText1P.text = point + "Point";
+        PointText2P.text = point + "Point";
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
