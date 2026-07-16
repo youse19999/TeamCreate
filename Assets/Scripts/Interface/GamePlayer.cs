@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class GamePlayer : MonoBehaviour, IPlayer
@@ -11,11 +12,19 @@ public class GamePlayer : MonoBehaviour, IPlayer
     [SerializeField] private Transform head;
     [SerializeField]  private float rotation;
 
+    private Vector2 moveInput = Vector2.zero;
+
     private GameObject headItem;
 
     public void CreateMove()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        Debug.Log(moveInput);
     }
     private Vector3 point;
     private Vector3 beforePoint;
@@ -55,7 +64,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
     {
         RaycastHit hit;
 
-        float horizonInput = Input.GetAxis("Horizontal");
+        float horizonInput = moveInput.x;
         if (MathF.Abs(horizonInput) > 0.1f)
         {
             rotation += horizonInput * GameStructure.GetInstance().playerStructure.rotateSpeed * Time.deltaTime;
@@ -87,7 +96,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
             }
         }
         //Yのaxisの入力
-        float verticalInput = Input.GetAxis("Vertical");
+        float verticalInput = moveInput.y;
         //使うスピード（input依存)
         float maxSpeed = (GameStructure.GetInstance().playerStructure.speed * (verticalInput * 1)) * verticalInput;
         //ベロシティー
@@ -108,7 +117,6 @@ public class GamePlayer : MonoBehaviour, IPlayer
         GetRigidBody().linearVelocity = clampedVelocity;
         beforePoint = point;
         //地面確認
-        Debug.Log((this.transform.forward * 0.1f));
         Vector3 rayOrigin = this.transform.position + (this.transform.forward*0.3f) + (this.transform.up * 5f);
 
         Vector3 rayDirection = -this.transform.up;
@@ -177,5 +185,10 @@ public class GamePlayer : MonoBehaviour, IPlayer
         Gizmos.DrawCube(this.transform.position, this.transform.forward * this.GetRigidBody().angularVelocity.z * rigidViewSize);
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(this.transform.position, this.transform.up * this.GetRigidBody().angularVelocity.y * rigidViewSize);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        Debug.Log("Jumping");
     }
 }
