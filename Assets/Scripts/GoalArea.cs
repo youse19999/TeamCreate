@@ -31,13 +31,13 @@ public class GoalArea : MonoBehaviour
                 //ItemPositionの子オブジェクト、スクリプトを取得、このPointに加算する
                 GameObject Item = child.gameObject;
                 ItemScript itemScript = Item.GetComponent<ItemScript>();
-                this.point += itemScript.point;
+                point += itemScript.point;
 
                 //加算を終えたらデストロイ
                 Destroy(Item);
 
                 //マップ内に存在するアイテム数を減少
-                spawnManager.
+                //
 
             }
             //デバッグ
