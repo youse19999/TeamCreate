@@ -47,9 +47,8 @@ public class UpDownMove : IState<DebugMoveObjectData>
 
     bool IState<DebugMoveObjectData>.IsEnd()
     {
-        float disntance = Vector3.Distance(beforePos, targetPos);
-        Debug.Log(disntance);
-        if (1.0f / disntance > 0.9f)
+        float disntance = Vector3.Distance(Vector3.Lerp(beforePos, targetPos, time), targetPos);
+        if (disntance < 0.9f)
         {
             return true;
         }
@@ -70,8 +69,8 @@ public class DebugMoveObject : MonoBehaviour
     void Start()
     {
         stateMachine = new StateMachine<DebugMoveObjectData>();
-        stateMachine.RegisterState("Up", new UpDownMove (this.transform.position,1,0.1f));
-        stateMachine.RegisterState("Down", new UpDownMove(this.transform.position,-1, 0.1f));
+        stateMachine.RegisterState("Up", new UpDownMove (this.transform.position,5,0.1f));
+        stateMachine.RegisterState("Down", new UpDownMove(this.transform.position,-5, 0.1f));
         stateMachine.TransitionTo("Down");
         stateMachine.Update();
     }
