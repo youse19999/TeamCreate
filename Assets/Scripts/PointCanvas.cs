@@ -3,26 +3,27 @@ using TMPro;
 
 public class PointCanvas : MonoBehaviour
 {
-    public TMP_Text PointText1P;
-    public TMP_Text PointText2P;
+    public TMP_Text ScoreText1P;
+    public TMP_Text ScoreText2P;
 
-    public void Point(int point)
+    //1Pと2Pの値を入れ、それをTEXTで表示
+    public void Point(int OneP,int TwoP)
     {
-        PointText1P.text = point + "Point";
-        PointText2P.text = point + "Point";
+        ScoreText1P.text = OneP + "Point";
+        ScoreText2P.text = TwoP + "Point";
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("Start");
+        Debug.Log("Start");//デバック用
     }
 
     // Update is called once per frame
     void Update()
     {
-        int kari = 0;
+        int kari = 0;//いったん仮
 
-        Point(kari);
+        Point(kari,kari);
     }
 }

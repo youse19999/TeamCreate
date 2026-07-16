@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 2035966554}
   - component: {fileID: 2035966555}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,8 +1281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c64c6153061514b863d64d142624d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointText1P: {fileID: 1199171155}
-  PointText2P: {fileID: 1939848308}
+  ScoreText1P: {fileID: 1199171155}
+  ScoreText2P: {fileID: 1939848308}
 --- !u!114 &2035966555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6e2fa72db7efd4899f9b64720db87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreText: {fileID: 19266721}
+  TimeText: {fileID: 19266721}
   Finish: 0
   canvasParameter: {fileID: 11400000, guid: 856033027bd0a5d4cbeda30c367f61a7, type: 2}
 --- !u!1 &2062371136

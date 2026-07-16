@@ -5,8 +5,8 @@ using UnityEngine;
 public class CanvasScriptableObject : ScriptableObject
 {
     [SerializeField] 
-    public float TimeLimit;
+    public float TimeLimit;//ŠÔ§ŒÀ
 
     [SerializeField]
-    public float TitleMoveSpeed;
+    public float TitleMoveSpeed;//TitleƒƒS‚ÌˆÚ“®‘¬“x
 }

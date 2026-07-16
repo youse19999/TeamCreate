@@ -3,19 +3,22 @@ using TMPro;
 
 public class TimeCanvas : MonoBehaviour
 {
-    public TMP_Text ScoreText;
+    public TMP_Text TimeText;
     [SerializeField] bool Finish;
     [SerializeField] private CanvasScriptableObject canvasParameter;
 
+    //Timelimit‚ÌText‚Ìİ’è
     public void ScoreRender(int time)
     {
-        ScoreText.text = "TimeLimit:" + time;
+        TimeText.text = "TimeLimit:" + time;
     }
 
+    //ŠÔ§ŒÀ
     public void TimeA(int time)
     {
         if (Finish)
         {
+            //ŠÔ‚ğ‚O‚ÉŒÅ’è‚·‚é
             canvasParameter.TimeLimit = 0;
         }
         else
@@ -24,6 +27,7 @@ public class TimeCanvas : MonoBehaviour
 
             canvasParameter.TimeLimit -= Time.deltaTime;
 
+            //TimeOut‚É‚È‚Á‚½‚çŠÔ‚ğ~‚ß‚é
             if ((int)canvasParameter.TimeLimit >= 1) { return; }
             Finish = true;
         }
