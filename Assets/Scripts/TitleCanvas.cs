@@ -8,8 +8,7 @@ public class TitleCanvas : MonoBehaviour
     void Start()
     {
         StopTitle = false;
-    }
-    void Update()
+    }    void Update()
     {
         if (transform.localPosition.y <= 90) { 
             StopTitle = true;//‘JˆÚI—¹
