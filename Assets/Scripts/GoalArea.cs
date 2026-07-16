@@ -3,15 +3,15 @@ using UnityEngine;
 public class GoalArea : MonoBehaviour
 {
     [SerializeField] GameObject targetPlayer;
-    [SerializeField] public int point = 0;
+    [SerializeField] public static int point = 0;//プレイヤーの得点
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
-
+    ItemSpawnManager spawnManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerName = targetPlayer.name;
-        //アイテムスクリプトなどを取得
+        spawnManager = GetComponent<ItemSpawnManager>();
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -32,8 +32,13 @@ public class GoalArea : MonoBehaviour
                 GameObject Item = child.gameObject;
                 ItemScript itemScript = Item.GetComponent<ItemScript>();
                 this.point += itemScript.point;
+
                 //加算を終えたらデストロイ
                 Destroy(Item);
+
+                //マップ内に存在するアイテム数を減少
+                spawnManager.
+
             }
             //デバッグ
             Debug.Log($"{playerName}のポイント:{point}");
