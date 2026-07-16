@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemSpawnManager : MonoBehaviour
 {
-    [SerializeField] private float spawnInterval = 10.0f;//スポーン感覚
+
     [SerializeField] private int maxSpawnAmount = 3;//マップ内に存在できるアイテムの数
     public static int currentSpawnAmount;
 
@@ -11,9 +11,11 @@ public class ItemSpawnManager : MonoBehaviour
 
     public List<GameObject> ItemList;//ノーマルアイテム
     public List<GameObject> SupecialItemList;//スペシャルアイテム
- 
+
+    [SerializeField] private float spawnInterval = 10.0f;//スポーン感覚
+    [SerializeField] private float specialItemTime = 30.0f;//逆転アイテム出現時間
     private float spawnTimer;
-    [SerializeField] private float specialItemTime = 30.0f;
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +47,7 @@ public class ItemSpawnManager : MonoBehaviour
             spawnTimer = 0.0f;
         }
         //制限時間が一定以下になると10pアイテムのスポーン
-        if (spawnTimer <= specialItemTime)
+        if (spawnTimer >= specialItemTime)
         {
             SpawnItem();
         }
