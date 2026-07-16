@@ -3,7 +3,7 @@ using UnityEngine;
 public class GoalArea : MonoBehaviour
 {
     [SerializeField] GameObject targetPlayer;
-    [SerializeField] public static int point = 0;//プレイヤーの得点
+    [SerializeField] public int point = 0;//プレイヤーの得点
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
     ItemSpawnManager spawnManager;
@@ -11,33 +11,30 @@ public class GoalArea : MonoBehaviour
     void Start()
     {
         playerName = targetPlayer.name;
-        spawnManager = GetComponent<ItemSpawnManager>();
     }
 
     private void OnTriggerEnter(Collider collider)
     {
         //エリアに侵入したアイテムの固有ポイントを取得、その分ポイント加算
-        //if(collider.gameObject.tag == "Item"){;}
-        //仮実装：アイテムをエリアに置くとポイント加算
      
         if (collider.gameObject == targetPlayer)
         {
             //ターゲットプレイヤの所持しているアイテムを取得
             Transform ItemPosition = targetPlayer.transform.Find("ItemPosition");
 
-            //アイテムのポイント加算と手持ちのアイテムデストロイ
+            //アイテムのポイント加算と手持ちのアイテムDestory
             foreach(Transform child in ItemPosition)
             {
                 //ItemPositionの子オブジェクト、スクリプトを取得、このPointに加算する
                 GameObject Item = child.gameObject;
                 ItemScript itemScript = Item.GetComponent<ItemScript>();
-                point += itemScript.point;
+                this.point += itemScript.point;
 
-                //加算を終えたらデストロイ
+                //加算を終えたらDestory
                 Destroy(Item);
 
                 //マップ内に存在するアイテム数を減少
-                //
+                ItemSpawnManager.currentSpawnAmount--;
 
             }
             //デバッグ
