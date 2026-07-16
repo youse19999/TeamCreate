@@ -64,7 +64,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         {
 
         }
-        point = this.transform.position + new Vector3(Mathf.Cos(rotation), 0, Mathf.Sin(rotation)) * 2;
+        point = this.transform.position + new Vector3(Mathf.Cos(rotation), 0, Mathf.Sin(rotation)) * 1.1f;
         //this.transform.rotation = ;
         //ツイスト
         Quaternion refQ = Quaternion.LookRotation(point - this.transform.position, this.transform.forward);
