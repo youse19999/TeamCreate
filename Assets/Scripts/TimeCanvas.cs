@@ -1,0 +1,49 @@
+using UnityEngine;
+using TMPro;
+
+public class TimeCanvas : MonoBehaviour
+{
+    public TMP_Text TimeText;
+    [SerializeField] bool Finish;
+    [SerializeField] private CanvasScriptableObject canvasParameter;
+
+    //Timelimit‚ÌText‚ÌÝ’è
+    public void ScoreRender(int time)
+    {
+        TimeText.text = "TimeLimit:" + time;
+    }
+
+    //ŽžŠÔ§ŒÀ
+    public void TimeA(int time)
+    {
+        if (Finish)
+        {
+            //ŽžŠÔ‚ð‚O‚ÉŒÅ’è‚·‚é
+            canvasParameter.TimeLimit = 0;
+        }
+        else
+        {
+            Debug.Log("ŽžŠÔ‚ªŒ¸‚Á‚Ä‚¢‚Ü‚·");
+
+            canvasParameter.TimeLimit -= Time.deltaTime;
+
+            //TimeOut‚É‚È‚Á‚½‚çŽžŠÔ‚ðŽ~‚ß‚é
+            if ((int)canvasParameter.TimeLimit >= 1) { return; }
+            Finish = true;
+        }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Finish = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        ScoreRender((int)canvasParameter.TimeLimit);
+
+        TimeA((int)canvasParameter.TimeLimit);
+    }
+}
