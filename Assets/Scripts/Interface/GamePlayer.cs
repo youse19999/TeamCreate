@@ -119,4 +119,31 @@ public class GamePlayer : MonoBehaviour, IPlayer
 
         Gizmos.DrawWireSphere(point, 1.0f);
     }
+
+    // 2026/7/16追加 山下
+    public GameObject DropItem()
+    {
+        if (headItem == null)
+        {
+            return null;
+        }
+
+        GameObject item = headItem;
+        headItem = null;
+
+        item.transform.SetParent(null);
+
+        Vector3 dropPos = transform.position + transform.forward * 1.0f;
+
+        if (Physics.Raycast(dropPos + Vector3.up * 10f, Vector3.down, out RaycastHit hit, 20f))
+        {
+            item.transform.position = hit.point;
+        }
+        else
+        {
+            item.transform.position = dropPos;
+        }
+
+        return item;
+    }
 }
