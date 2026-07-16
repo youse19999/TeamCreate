@@ -48,9 +48,9 @@ public class UpDownMove : IState<DebugMoveObjectData>
     bool IState<DebugMoveObjectData>.IsEnd()
     {
         float disntance = Vector3.Distance(beforePos, targetPos);
-        Debug.Log(disntance);
-        if (1.0f / disntance > 0.9f)
+        if (disntance < 0.9f)
         {
+            Debug.Log(disntance);
             return true;
         }
         return false;

@@ -121,7 +121,15 @@ public class GamePlayer : MonoBehaviour, IPlayer
             {
                 if (MathF.Abs(this.transform.position.y - hit.point.y) > 0.1f)
                 {
-                    this.transform.position = new Vector3(this.transform.position.x, hit.point.y,this.transform.position.z);
+                    if (MathF.Abs(this.transform.position.y - hit.point.y) > 1.0f)
+                    {
+                        GetRigidBody().linearVelocity = Vector3.zero;
+
+                    }
+                    else
+                    {
+                        this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
+                    }
                 }
             }
         }
