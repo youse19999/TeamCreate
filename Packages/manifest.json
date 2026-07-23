@@ -7,6 +7,7 @@
     "com.unity.nuget.newtonsoft-json": "3.2.2",
     "com.unity.probuilder": "6.0.9",
     "com.unity.ugui": "2.0.0",
+    "jp.lilxyzw.liltoon": "2.3.4",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -39,5 +40,15 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "lilToon",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "jp.lilxyzw.liltoon"
+      ],
+      "overrideBuiltIns": false
+    }
+  ]
 }

@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 
 public class GamePlayer : MonoBehaviour, IPlayer
 {
+    [SerializeField] public GoalArea area;
+    [SerializeField] public GoalArea area2;
+
     [SerializeField] public Camera gameCamera;
     // モック用アイテム
     [SerializeField] public GameObject item;
@@ -21,10 +24,13 @@ public class GamePlayer : MonoBehaviour, IPlayer
         throw new System.NotImplementedException();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMoveFoward(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
-        Debug.Log(moveInput);
+        moveInput.y = context.ReadValue<Vector2>().y;
+    }
+    public void OnMoveSide(InputAction.CallbackContext context)
+    {
+        moveInput.x = context.ReadValue<Vector2>().x;
     }
     private Vector3 point;
     private Vector3 beforePoint;
@@ -41,7 +47,12 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void Start()
     {
         GetRigidBody();
-
+        area = GameObject.Find("Goal").GetComponent<GoalArea>();
+        area2 = GameObject.Find("Goal2").GetComponent<GoalArea>();
+        if (area.Seted(this.gameObject))
+        {
+            area2.Seted(this.gameObject);
+        }
         // モックアイテムを頭上表示
     }
     public void ShowItem(GameObject itemPrefab)
@@ -51,9 +62,10 @@ public class GamePlayer : MonoBehaviour, IPlayer
             return;
         }
         headItem = Instantiate(itemPrefab, head);
-
+        headItem.GetComponent<ItemScript>().having = true;
         headItem.transform.localPosition = new Vector3(0f, 0.3f, 0f);
         headItem.transform.localRotation = Quaternion.identity;
+        //headItem.transform.parent = this.transform;
         //itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
     }
     public bool HasItem()

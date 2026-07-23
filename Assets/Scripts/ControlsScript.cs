@@ -12,6 +12,6 @@ public class ControlsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("main"); }
+        if(Input.GetKeyDown(KeyCode.Space)) { SceneManager.LoadScene("main_current2"); }
     }
 }
