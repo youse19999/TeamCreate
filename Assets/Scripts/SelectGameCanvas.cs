@@ -9,7 +9,7 @@ public class SelectGameCanvas : MonoBehaviour
 
     void ChoiseGame()
     {
-        if (ChangeAnim == true) { SceneManager.LoadScene("main"); }
+        if (ChangeAnim == true) { SceneManager.LoadScene("main_current2"); }
         if (ChangeAnim == false) { SceneManager.LoadScene("Controls"); }
     }
     void ChangeAnimation()

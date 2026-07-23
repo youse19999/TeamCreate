@@ -24,12 +24,10 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void OnMoveFoward(InputAction.CallbackContext context)
     {
         moveInput.y = context.ReadValue<Vector2>().y;
-        Debug.Log(moveInput);
     }
     public void OnMoveSide(InputAction.CallbackContext context)
     {
         moveInput.x = context.ReadValue<Vector2>().x;
-        Debug.Log(moveInput);
     }
     private Vector3 point;
     private Vector3 beforePoint;
@@ -56,9 +54,10 @@ public class GamePlayer : MonoBehaviour, IPlayer
             return;
         }
         headItem = Instantiate(itemPrefab, head);
-
+        headItem.GetComponent<ItemScript>().having = true;
         headItem.transform.localPosition = new Vector3(0f, 0.3f, 0f);
         headItem.transform.localRotation = Quaternion.identity;
+        //headItem.transform.parent = this.transform;
         //itemFilter.mesh = GameStructure.GetInstance().playerStructure.Item.mesh;
     }
     public bool HasItem()

@@ -9,6 +9,8 @@ public class ItemScript : MonoBehaviour
     [SerializeField] float amplitude = 0.3f; // è„â∫ïù
     [SerializeField] float speed = 2f;        // óhÇÍÇÈë¨Ç≥
 
+    public bool having = false;
+
     Vector3 startPos;
 
     void Start()
@@ -20,14 +22,26 @@ public class ItemScript : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
+            if(col.gameObject.GetComponent<GamePlayer>().HasItem())
+            {
+                return;
+            }
+            col.gameObject.GetComponent<GamePlayer>().ShowItem(this.gameObject);
+            having = true;
             ItemSpawnManager.currentSpawnAmount--;
         }
     }
 
     private void Update()
     {
-        //Ç”ÇÌÇ”ÇÌìÆÇ≠ïÇóVä¥
-        transform.position = startPos + Vector3.up * Mathf.Sin(Time.time * speed) * amplitude;
+        if (!having)
+        {
+            //Ç”ÇÌÇ”ÇÌìÆÇ≠ïÇóVä¥
+            transform.localPosition = startPos + Vector3.up * Mathf.Sin(Time.time * speed) * amplitude;
+        }
+        else
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
 }
