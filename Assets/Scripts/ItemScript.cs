@@ -5,14 +5,29 @@ public class ItemScript : MonoBehaviour
     public int point;//1,2,3,10
     GamePlayer gamePlayer;
 
+    //疑似的なアニメーション
+    [SerializeField] float amplitude = 0.3f; // 上下幅
+    [SerializeField] float speed = 2f;        // 揺れる速さ
+
+    Vector3 startPos;
+
+    void Start()
+    {
+        startPos = transform.position;
+    }
+
     private void OnTriggerEnter(Collider col)
     {
-        //すでにアイテムを所持しているなら処理しない　: 未実装
-
         if(col.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
             ItemSpawnManager.currentSpawnAmount--;
         }
+    }
+
+    private void Update()
+    {
+        //ふわふわ動く浮遊感
+        transform.position = startPos + Vector3.up * Mathf.Sin(Time.time * speed) * amplitude;
     }
 }
