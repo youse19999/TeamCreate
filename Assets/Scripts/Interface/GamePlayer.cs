@@ -21,9 +21,14 @@ public class GamePlayer : MonoBehaviour, IPlayer
         throw new System.NotImplementedException();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMoveFoward(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        moveInput.y = context.ReadValue<Vector2>().y;
+        Debug.Log(moveInput);
+    }
+    public void OnMoveSide(InputAction.CallbackContext context)
+    {
+        moveInput.x = context.ReadValue<Vector2>().x;
         Debug.Log(moveInput);
     }
     private Vector3 point;
