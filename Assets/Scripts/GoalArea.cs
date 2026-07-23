@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GoalArea : MonoBehaviour
 {
-    [SerializeField] GameObject targetPlayer;
+    bool seted = false;
+    [SerializeField] public GameObject targetPlayer;
     [SerializeField] public int point = 0;//プレイヤーの得点
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
@@ -12,7 +13,19 @@ public class GoalArea : MonoBehaviour
     {
         playerName = targetPlayer.name;
     }
-
+    public bool Seted(GameObject obj)
+    {
+        if (!seted)
+        {
+            this.targetPlayer = obj;
+            seted = true;
+        }
+        else
+        {
+            return true;
+        }
+        return false;
+    }
     private void OnTriggerEnter(Collider collider)
     {
         //エリアに侵入したアイテムの固有ポイントを取得、その分ポイント加算
