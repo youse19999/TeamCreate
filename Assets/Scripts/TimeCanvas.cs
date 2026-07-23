@@ -3,8 +3,10 @@ using TMPro;
 
 public class TimeCanvas : MonoBehaviour
 {
+    private Animator anim = null;
     public TMP_Text TimeText;
     [SerializeField] bool Finish;
+    [SerializeField] public float timelimit;
     [SerializeField] private CanvasScriptableObject canvasParameter;
 
     //Timelimit‚ÌText‚ÌÝ’è
@@ -19,16 +21,17 @@ public class TimeCanvas : MonoBehaviour
         if (Finish)
         {
             //ŽžŠÔ‚ð‚O‚ÉŒÅ’è‚·‚é
-            canvasParameter.TimeLimit = 0;
+            timelimit = 0;
         }
         else
         {
             Debug.Log("ŽžŠÔ‚ªŒ¸‚Á‚Ä‚¢‚Ü‚·");
 
-            canvasParameter.TimeLimit -= Time.deltaTime;
+            timelimit-=Time.deltaTime;
 
             //TimeOut‚É‚È‚Á‚½‚çŽžŠÔ‚ðŽ~‚ß‚é
-            if ((int)canvasParameter.TimeLimit >= 1) { return; }
+            if ((int)timelimit >= 1) { return; }
+            anim.SetBool("Finish", true);
             Finish = true;
         }
     }
@@ -36,14 +39,16 @@ public class TimeCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = GetComponent<Animator>();
         Finish = false;
+        timelimit=canvasParameter.TimeLimit;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ScoreRender((int)canvasParameter.TimeLimit);
+        ScoreRender((int)timelimit);
 
-        TimeA((int)canvasParameter.TimeLimit);
+        TimeA((int)timelimit);
     }
 }
