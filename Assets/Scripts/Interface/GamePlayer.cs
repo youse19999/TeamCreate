@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 
 public class GamePlayer : MonoBehaviour, IPlayer
 {
+    [SerializeField] public GoalArea area;
+    [SerializeField] public GoalArea area2;
+
     [SerializeField] public Camera gameCamera;
     // モック用アイテム
     [SerializeField] public GameObject item;
@@ -44,7 +47,12 @@ public class GamePlayer : MonoBehaviour, IPlayer
     public void Start()
     {
         GetRigidBody();
-
+        area = GameObject.Find("Goal").GetComponent<GoalArea>();
+        area2 = GameObject.Find("Goal2").GetComponent<GoalArea>();
+        if (area.Seted(this.gameObject))
+        {
+            area2.Seted(this.gameObject);
+        }
         // モックアイテムを頭上表示
     }
     public void ShowItem(GameObject itemPrefab)

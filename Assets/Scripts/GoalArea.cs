@@ -13,9 +13,18 @@ public class GoalArea : MonoBehaviour
     {
         playerName = targetPlayer.name;
     }
-    public void Seted()
+    public bool Seted(GameObject obj)
     {
-        seted = true;
+        if (!seted)
+        {
+            this.targetPlayer = obj;
+            seted = true;
+        }
+        else
+        {
+            return true;
+        }
+        return false;
     }
     private void OnTriggerEnter(Collider collider)
     {

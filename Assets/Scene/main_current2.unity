@@ -1161,6 +1161,7 @@ MonoBehaviour:
   point: 1
   amplitude: 0.3
   speed: 2
+  having: 0
 --- !u!135 &381666345
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2286,6 +2287,7 @@ MonoBehaviour:
   point: 1
   amplitude: 0.3
   speed: 2
+  having: 0
 --- !u!114 &664201941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2346,6 +2348,7 @@ MonoBehaviour:
   point: 1
   amplitude: 0.3
   speed: 2
+  having: 0
 --- !u!135 &692618453
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6419,7 +6422,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 675740472600296965, guid: ac6dc745fbf10734e829652c3a80eb0f, type: 3}
       propertyPath: m_Name
-      value: Goal (1)
+      value: Goal2
       objectReference: {fileID: 0}
     - target: {fileID: 8973383186673167573, guid: ac6dc745fbf10734e829652c3a80eb0f, type: 3}
       propertyPath: m_LocalScale.x
