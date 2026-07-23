@@ -31,7 +31,7 @@ public class PointCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Point(OnePlayer.point, TwoPlayer.point);
+        Point(OnePlayer.point, TwoPlayer.point);
 
         if (OnePlayer.point > TwoPlayer.point) { OnePlayerWin(); }
         else if (OnePlayer.point > TwoPlayer.point) { TwoPlayerWin(); }
