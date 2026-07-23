@@ -11,6 +11,7 @@ public class CameraScript : MonoBehaviour
     {
         timecanvas = UICanvas.GetComponent<TimeCanvas>();
         anim = GetComponent<Animator>();
+        Debug.Log("Œ»İ‚Ìanim‚Í"+anim);
     }
 
     // Update is called once per frame
@@ -18,7 +19,10 @@ public class CameraScript : MonoBehaviour
     {
         if(timecanvas.AnimFinish == true)
         {
+            Debug.Log("ƒJƒƒ‰‚ğ•ÏX‚µ‚Ü‚·");
             anim.SetBool("GameMode", false);
+
+            Debug.Log("¡‚ÌGameMode‚Í" + anim.GetBool("GameMode"));
         }
     }
 }
