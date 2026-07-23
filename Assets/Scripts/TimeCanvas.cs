@@ -3,6 +3,7 @@ using TMPro;
 
 public class TimeCanvas : MonoBehaviour
 {
+    private Animator anim = null;
     public TMP_Text TimeText;
     [SerializeField] bool Finish;
     [SerializeField] public float timelimit;
@@ -30,6 +31,7 @@ public class TimeCanvas : MonoBehaviour
 
             //TimeOut‚É‚È‚Á‚½‚çŽžŠÔ‚ðŽ~‚ß‚é
             if ((int)timelimit >= 1) { return; }
+            anim.SetBool("Finish", true);
             Finish = true;
         }
     }
@@ -37,6 +39,7 @@ public class TimeCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = GetComponent<Animator>();
         Finish = false;
         timelimit=canvasParameter.TimeLimit;
     }

@@ -4,6 +4,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PointCanvas : MonoBehaviour
 {
+    private Animator anim = null;
     public TMP_Text ScoreText1P;
     public TMP_Text ScoreText2P;
     [SerializeField] private GameObject OneP;
@@ -21,6 +22,7 @@ public class PointCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = GetComponent<Animator>();
         OnePlayer = OneP.GetComponent<GoalArea>();
         TwoPlayer = TwoP.GetComponent<GoalArea>();
         Debug.Log("Start");//デバック用
@@ -29,6 +31,29 @@ public class PointCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Point(OnePlayer.point, TwoPlayer.point);
+        //Point(OnePlayer.point, TwoPlayer.point);
+
+        if (OnePlayer.point > TwoPlayer.point) { OnePlayerWin(); }
+        else if (OnePlayer.point > TwoPlayer.point) { TwoPlayerWin(); }
+        else { Draw(); }
     }
+
+    void OnePlayerWin()
+    {
+        anim.SetBool("OnePWin", true);
+        anim.SetBool("TwoPWin", false);
+    }
+
+    void TwoPlayerWin()
+    {
+        anim.SetBool("OnePWin", false);
+        anim.SetBool("TwoPWin", true);
+    }
+
+    void Draw()
+    {
+        anim.SetBool("OnePWin", false);
+        anim.SetBool("TwoPWin", false);
+    }
+
 }
