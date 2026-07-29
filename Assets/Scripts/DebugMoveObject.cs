@@ -1,10 +1,9 @@
 using System;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 /*
-ƒfƒoƒbƒOƒV[ƒ“—p‚Ì“®‚­°
+ãƒ‡ãƒãƒƒã‚°ã‚·ãƒ¼ãƒ³ç”¨ã®å‹•ãåºŠ
 */
 
 struct DebugMoveObjectData
@@ -12,11 +11,11 @@ struct DebugMoveObjectData
     public Vector3 pos;
 }
 
-// ‘Ò‹@ó‘Ô
+// å¾…æ©ŸçŠ¶æ…‹
 public class UpDownMove : IState<DebugMoveObjectData>
 {
     /*
-     * •Ï”‰Šú‰»
+     * å¤‰æ•°åˆæœŸåŒ–
      */
     protected float height;
     protected Vector3 beforePos;
