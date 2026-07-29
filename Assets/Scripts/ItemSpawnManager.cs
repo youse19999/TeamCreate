@@ -43,11 +43,9 @@ public class ItemSpawnManager : MonoBehaviour
         }
         //等間隔でSpawnAreaのランダムな位置にスポーン
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount)
-        {
-            SpawnItem();
-            spawnTimer = 0.0f;
-        }
+        specialItemTime += Time.deltaTime;
+        SpawnItem();
+        
         //制限時間が一定以下になると10pアイテムのスポーンなど追加予定：未実装
     }
 
@@ -66,24 +64,32 @@ public class ItemSpawnManager : MonoBehaviour
 
 
         //通常アイテムのスポーン
-        //if (spawnTimer > spawnInterval)
+        if (spawnTimer > spawnInterval)
         {
-            if (ItemList == null || ItemList.Count ==0) { Debug.LogError("ItemListに不足があります"); return; }
+            if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount)
+            {
+                if (ItemList == null || ItemList.Count == 0) { Debug.LogError("ItemListに不足があります"); return; }
 
-            int randamItemNumber = Random.Range(0, ItemList.Count);
-            Instantiate(ItemList[randamItemNumber], randomPosition, Quaternion.identity);
-            //マップ内のアイテム数加算
-            currentSpawnAmount++;
+                int randamItemNumber = Random.Range(0, ItemList.Count);
+                Instantiate(ItemList[randamItemNumber], randomPosition, Quaternion.identity);
+                //マップ内のアイテム数加算
+                currentSpawnAmount++;
+                spawnTimer = 0.0f;
+            }
         }
         //逆転アイテムのスポーン
-        if(canvasScriptableObject.TimeLimit < specialItemTime)
+        if(canvasScriptableObject.TimeLimit/2 < specialItemTime)
         {
-            if (SpecialItemList == null || SpecialItemList.Count ==0) { Debug.LogError("SpecialItemListに不足があります"); return; }
+            if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount*1.3f)
+            {
+                if (SpecialItemList == null || SpecialItemList.Count == 0) { Debug.LogError("SpecialItemListに不足があります"); return; }
 
-            int randamItemNumber = Random.Range(0, SpecialItemList.Count);
-            Instantiate(SpecialItemList[randamItemNumber], randomPosition, Quaternion.identity);
-            //マップ内のアイテム数加算
-            currentSpawnAmount++;
+                int randamItemNumber = Random.Range(0, SpecialItemList.Count);
+                Instantiate(SpecialItemList[randamItemNumber], randomPosition, Quaternion.identity);
+                //マップ内のアイテム数加算
+                currentSpawnAmount++;
+                spawnTimer = 0.0f;
+            }
         }
 
          
