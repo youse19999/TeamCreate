@@ -15,19 +15,21 @@ public class ItemSpawnManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 10.0f;//スポーン感覚
     [SerializeField] private float specialItemTime = 30.0f;//逆転アイテム出現時間
     private float spawnTimer;
-   
+
+    [SerializeField] private CanvasScriptableObject canvasScriptableObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentSpawnAmount = 0;
+        SpawnItem();
     }
 
     // Update is called once per frame
     void Update()
     {
         ItemSpawn();
-        Debug.Log(currentSpawnAmount);
+
     }
 
     //スポーンの条件
@@ -64,7 +66,7 @@ public class ItemSpawnManager : MonoBehaviour
 
 
         //通常アイテムのスポーン
-        if (spawnTimer < specialItemTime)
+        //if (spawnTimer > spawnInterval)
         {
             if (ItemList == null || ItemList.Count ==0) { Debug.LogError("ItemListに不足があります"); return; }
 
@@ -74,7 +76,7 @@ public class ItemSpawnManager : MonoBehaviour
             currentSpawnAmount++;
         }
         //逆転アイテムのスポーン
-        else
+        if(canvasScriptableObject.TimeLimit < specialItemTime)
         {
             if (SpecialItemList == null || SpecialItemList.Count ==0) { Debug.LogError("SpecialItemListに不足があります"); return; }
 
@@ -83,6 +85,7 @@ public class ItemSpawnManager : MonoBehaviour
             //マップ内のアイテム数加算
             currentSpawnAmount++;
         }
+
          
 
 
