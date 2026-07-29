@@ -19,10 +19,7 @@ public class CameraScript : MonoBehaviour
     {
         if(timecanvas.AnimFinish == true)
         {
-            Debug.Log("ƒJƒƒ‰‚ğ•ÏX‚µ‚Ü‚·");
             anim.SetBool("GameMode", false);
-
-            Debug.Log("¡‚ÌGameMode‚Í" + anim.GetBool("GameMode"));
         }
     }
 }

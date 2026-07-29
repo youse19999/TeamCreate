@@ -850,6 +850,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 1
+  amplitude: 0.3
+  speed: 2
+  having: 0
 --- !u!135 &275641181
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1750,7 +1753,7 @@ Animator:
   m_GameObject: {fileID: 4703997831783974945}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b9d20cff2e3af51499889589afe78619, type: 3}
-  m_Controller: {fileID: 9100000, guid: 07ddcf87be5c62b43ac22c10aefa849c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 89dd42293657aea428642404d32ce5b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4843,6 +4846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1464117318}
+  - component: {fileID: 1464117320}
   m_Layer: 0
   m_Name: PlayerAnimation
   m_TagString: Untagged
@@ -4867,6 +4871,18 @@ Transform:
   - {fileID: 543450653609573874}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1464117320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464117317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c2186b8054d0b4a9c062741c178eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1480329806
 GameObject:
   m_ObjectHideFlags: 0
@@ -11445,7 +11461,7 @@ Animator:
   m_GameObject: {fileID: 919132149153163080}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b9d20cff2e3af51499889589afe78619, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8a27690c25773ec4eb1622437b45e2c2, type: 2}
+  m_Controller: {fileID: 9100000, guid: db991e6ed0638674fbe2bdf09000d9ba, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

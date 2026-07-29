@@ -31,8 +31,6 @@ public class TimeCanvas : MonoBehaviour
         }
         else
         {
-            Debug.Log("ŽžŠÔ‚ªŒ¸‚Á‚Ä‚¢‚Ü‚·");
-
             timelimit-=Time.deltaTime;
 
             //TimeOut‚É‚È‚Á‚½‚çŽžŠÔ‚ðŽ~‚ß‚é
