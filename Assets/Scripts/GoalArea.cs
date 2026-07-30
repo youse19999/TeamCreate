@@ -4,6 +4,9 @@ public class GoalArea : MonoBehaviour
 {
     bool seted = false;
     [SerializeField] public GameObject targetPlayer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip goalSE;
+    [SerializeField] private ParticleSystem goalEffect;
     [SerializeField] public int point = 0;//プレイヤーの得点
     private string playerName;
     private string pointTargetTag;//ここにアイテムtagの名前を書く
@@ -42,6 +45,10 @@ public class GoalArea : MonoBehaviour
                 GameObject Item = child.gameObject;
                 ItemScript itemScript = Item.GetComponent<ItemScript>();
                 this.point += itemScript.point;
+                // SE再生
+                audioSource.PlayOneShot(goalSE);
+                // エフェクト再生
+                goalEffect.Play();
 
                 //加算を終えたらDestory
                 Destroy(Item);
