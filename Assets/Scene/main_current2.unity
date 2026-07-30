@@ -211,14 +211,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4242977683562031446, guid: f9bedcb2ecbc92a4998ca2ec66273943, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.999878
+      objectReference: {fileID: 0}
     - target: {fileID: 8176924111388121733, guid: f9bedcb2ecbc92a4998ca2ec66273943, type: 3}
       propertyPath: OneP
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 27152700}
     - target: {fileID: 8176924111388121733, guid: f9bedcb2ecbc92a4998ca2ec66273943, type: 3}
       propertyPath: TwoP
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 20604205}
+    - target: {fileID: 8176924111388121733, guid: f9bedcb2ecbc92a4998ca2ec66273943, type: 3}
+      propertyPath: OnePlayer
+      value: 
+      objectReference: {fileID: 311212144}
+    - target: {fileID: 8176924111388121733, guid: f9bedcb2ecbc92a4998ca2ec66273943, type: 3}
+      propertyPath: TwoPlayer
+      value: 
+      objectReference: {fileID: 2136945627}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -973,6 +985,17 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: ad2d46b8de04e5949b16eba6058e0736, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &311212144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1712074198876231490, guid: ac6dc745fbf10734e829652c3a80eb0f, type: 3}
+  m_PrefabInstance: {fileID: 1809700720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69b8256a914a7b4fbf0fe85b8c371c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &340129665
 GameObject:
   m_ObjectHideFlags: 0
@@ -5337,6 +5360,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8970545466677038496, guid: 6a89ec70348814447af66de54214dcdb, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970545466677038496, guid: 6a89ec70348814447af66de54214dcdb, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970545466677038496, guid: 6a89ec70348814447af66de54214dcdb, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6913,6 +6948,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108821771}
   m_CullTransparentMesh: 1
+--- !u!114 &2136945627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1712074198876231490, guid: ac6dc745fbf10734e829652c3a80eb0f, type: 3}
+  m_PrefabInstance: {fileID: 31889969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69b8256a914a7b4fbf0fe85b8c371c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

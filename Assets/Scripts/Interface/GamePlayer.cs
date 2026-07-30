@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class GamePlayer : MonoBehaviour, IPlayer
 {
+    [SerializeField] public Animator animator;
+
     [SerializeField] public GoalArea area;
     [SerializeField] public GoalArea area2;
 
@@ -49,6 +51,7 @@ public class GamePlayer : MonoBehaviour, IPlayer
         GetRigidBody();
         area = GameObject.Find("Goal").GetComponent<GoalArea>();
         area2 = GameObject.Find("Goal2").GetComponent<GoalArea>();
+        animator = this.GetComponent<Animator>();
         if (area.Seted(this.gameObject))
         {
             area2.Seted(this.gameObject);
@@ -113,6 +116,14 @@ public class GamePlayer : MonoBehaviour, IPlayer
         float maxSpeed = (GameStructure.GetInstance().playerStructure.speed * (verticalInput * 1)) * verticalInput;
         //ベロシティー
         Vector3 velocity = GetRigidBody().linearVelocity + (this.transform.forward * verticalInput * maxSpeed);
+        if(velocity.sqrMagnitude > 1)
+        {
+            animator.SetBool("running",true);
+        }
+        else
+        {
+            animator.SetBool("running", false);
+        }
         //クランプ（ここでyもクランプされる）
         if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
