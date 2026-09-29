@@ -25,9 +25,24 @@ public class SelectGameCanvas : MonoBehaviour
         if (!TitleCanvas.StopTitle) { return; }
         ChangeAnimation();
 
-        if (Input.GetKey(KeyCode.A)) {ChangeAnim = true;}//Game‚ð‘I‘ð
-        if (Input.GetKey(KeyCode.D)) { ChangeAnim = false; }//Controls‚ð‘I‘ð
-        if (Input.GetKey(KeyCode.Space)) { ChoiseGame(); }//ŽŸ‚Ì‰æ–Ê‚Ö‘JˆÚ
+        //if (Input.GetKey(KeyCode.A)) {ChangeAnim = true;}//Game‚ð‘I‘ð
+        //if (Input.GetKey(KeyCode.D)) { ChangeAnim = false; }//Controls‚ð‘I‘ð
+        //if (Input.GetKey(KeyCode.Space)) { ChoiseGame(); }//ŽŸ‚Ì‰æ–Ê‚Ö‘JˆÚ
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetAxisRaw("Horizontal") < 0.6f)
+        {
+            ChangeAnim = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetAxisRaw("Horizontal") > 0.6f)
+        {
+            ChangeAnim = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
+        {
+            ChoiseGame();
+        }
     }
     void Start()
     {

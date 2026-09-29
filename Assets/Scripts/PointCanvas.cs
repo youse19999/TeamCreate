@@ -1,18 +1,15 @@
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PointCanvas : MonoBehaviour
 {
     private Animator anim = null;
     public TMP_Text ScoreText1P;
     public TMP_Text ScoreText2P;
-    [SerializeField] private GameObject OneP;
-    [SerializeField] private GameObject TwoP;
-    GoalArea OnePlayer;
-    GoalArea TwoPlayer;
+    [SerializeField] GoalArea OnePlayer;
+    [SerializeField] GoalArea TwoPlayer;
 
-    //1Pと2Pの値を入れ、それをTEXTで表示
+    //1P縺ｨ2P縺ｮ蛟､繧貞�･繧後√◎繧後ｒTEXT縺ｧ陦ｨ遉ｺ
     public void Point(int OneP,int TwoP)
     {
         ScoreText1P.text = OneP + "Point";
@@ -23,14 +20,13 @@ public class PointCanvas : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        OnePlayer = OneP.GetComponent<GoalArea>();
-        TwoPlayer = TwoP.GetComponent<GoalArea>();
-        Debug.Log("Start");//デバック用
+        Debug.Log("Start");//繝�繝舌ャ繧ｯ逕ｨ
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(OnePlayer);
         Point(OnePlayer.point, TwoPlayer.point);
 
         if (OnePlayer.point > TwoPlayer.point) { OnePlayerWin(); }
