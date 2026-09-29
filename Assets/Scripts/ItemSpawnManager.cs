@@ -15,21 +15,19 @@ public class ItemSpawnManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 10.0f;//スポーン感覚
     [SerializeField] private float specialItemTime = 30.0f;//逆転アイテム出現時間
     private float spawnTimer;
-
-    [SerializeField] private CanvasScriptableObject canvasScriptableObject;
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentSpawnAmount = 0;
-        SpawnItem();
     }
 
     // Update is called once per frame
     void Update()
     {
         ItemSpawn();
-
+        Debug.Log(currentSpawnAmount);
     }
 
     //スポーンの条件
@@ -43,9 +41,11 @@ public class ItemSpawnManager : MonoBehaviour
         }
         //等間隔でSpawnAreaのランダムな位置にスポーン
         spawnTimer += Time.deltaTime;
-        specialItemTime += Time.deltaTime;
-        SpawnItem();
-        
+        if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount)
+        {
+            SpawnItem();
+            spawnTimer = 0.0f;
+        }
         //制限時間が一定以下になると10pアイテムのスポーンなど追加予定：未実装
     }
 
@@ -64,34 +64,25 @@ public class ItemSpawnManager : MonoBehaviour
 
 
         //通常アイテムのスポーン
-        if (spawnTimer > spawnInterval)
+        if (spawnTimer < specialItemTime)
         {
-            if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount)
-            {
-                if (ItemList == null || ItemList.Count == 0) { Debug.LogError("ItemListに不足があります"); return; }
+            if (ItemList == null || ItemList.Count ==0) { Debug.LogError("ItemListに不足があります"); return; }
 
-                int randamItemNumber = Random.Range(0, ItemList.Count);
-                Instantiate(ItemList[randamItemNumber], randomPosition, Quaternion.identity);
-                //マップ内のアイテム数加算
-                currentSpawnAmount++;
-                spawnTimer = 0.0f;
-            }
+            int randamItemNumber = Random.Range(0, ItemList.Count);
+            Instantiate(ItemList[randamItemNumber], randomPosition, Quaternion.identity);
+            //マップ内のアイテム数加算
+            currentSpawnAmount++;
         }
         //逆転アイテムのスポーン
-        if(canvasScriptableObject.TimeLimit/2 < specialItemTime)
+        else
         {
-            if (spawnTimer >= spawnInterval && currentSpawnAmount < maxSpawnAmount*1.3f)
-            {
-                if (SpecialItemList == null || SpecialItemList.Count == 0) { Debug.LogError("SpecialItemListに不足があります"); return; }
+            if (SpecialItemList == null || SpecialItemList.Count ==0) { Debug.LogError("SpecialItemListに不足があります"); return; }
 
-                int randamItemNumber = Random.Range(0, SpecialItemList.Count);
-                Instantiate(SpecialItemList[randamItemNumber], randomPosition, Quaternion.identity);
-                //マップ内のアイテム数加算
-                currentSpawnAmount++;
-                spawnTimer = 0.0f;
-            }
+            int randamItemNumber = Random.Range(0, SpecialItemList.Count);
+            Instantiate(SpecialItemList[randamItemNumber], randomPosition, Quaternion.identity);
+            //マップ内のアイテム数加算
+            currentSpawnAmount++;
         }
-
          
 
 

@@ -5,14 +5,20 @@ public class TimeCanvas : MonoBehaviour
 {
     private Animator anim = null;
     public TMP_Text TimeText;
-    [SerializeField] bool Finish;
+    [SerializeField] public bool Finish;
     [SerializeField] public float timelimit;
     [SerializeField] private CanvasScriptableObject canvasParameter;
+    [SerializeField] public bool AnimFinish;
 
     //Timelimit‚ÌText‚Ìİ’è
     public void ScoreRender(int time)
     {
         TimeText.text = "TimeLimit:" + time;
+    }
+
+    public void FinishAnimation()
+    {
+        AnimFinish = true;
     }
 
     //ŠÔ§ŒÀ
@@ -25,8 +31,6 @@ public class TimeCanvas : MonoBehaviour
         }
         else
         {
-            Debug.Log("ŠÔ‚ªŒ¸‚Á‚Ä‚¢‚Ü‚·");
-
             timelimit-=Time.deltaTime;
 
             //TimeOut‚É‚È‚Á‚½‚çŠÔ‚ğ~‚ß‚é
